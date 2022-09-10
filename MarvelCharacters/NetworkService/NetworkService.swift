@@ -49,6 +49,8 @@ final class DefaultNetworkService: NetworkService {
 
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = request.method.rawValue
+
+        let basicHeader = ["apikey": apiKey, "hash": hash]
         urlRequest.allHTTPHeaderFields = request.headers
 
         session.dataTask(with: urlRequest) { (data, response, error) in
