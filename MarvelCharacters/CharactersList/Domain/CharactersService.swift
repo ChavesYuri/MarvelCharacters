@@ -1,6 +1,6 @@
 import Foundation
-protocol CharacterRepositoryProtocol {
-    func fetchCharacters(model: CharactersParams, completion: @escaping (Result<CharactersDataModel, Error>) -> Void)
+protocol CharactersRepositoryProtocol {
+    func fetchCharacters(request: CharactersParams, completion: @escaping (Result<CharactersDataModel, Error>) -> Void)
 }
 
 enum CharactersServiceError: Error {
@@ -12,17 +12,18 @@ final class CharactersService: CharactersServiceProtocol {
     private let initialOffset = 0
     private var totalItems: Int?
     private var isFetchInProgress = false
-    private var characters: [CharactersResult] = []
+    private var characters: [Character] = []
 
-    private let repository: CharacterRepositoryProtocol
+    private let repository: CharactersRepositoryProtocol
 
-    init(repository: CharacterRepositoryProtocol) {
+    init(repository: CharactersRepositoryProtocol) {
         self.repository = repository
     }
 
-    func loadCharacters(completion: @escaping (Result<CharactersResult, CharactersServiceError>) -> Void) {
+    func loadCharacters(completion: @escaping (Result<[Character], CharactersServiceError>) -> Void) {
         guard let totalItems = totalItems else {
             /// First page
+            fetch(params: .init(offset: initialOffset), completion: completion)
             return
         }
 
@@ -34,12 +35,13 @@ final class CharactersService: CharactersServiceProtocol {
         }
     }
 
-    private func fetch(params: CharactersParams, completion: @escaping (Result<CharactersResult, CharactersServiceError>) -> Void) {
-        repository.fetchCharacters(model: params) { [weak self] result in
+    private func fetch(params: CharactersParams, completion: @escaping (Result<[Character], CharactersServiceError>) -> Void) {
+        repository.fetchCharacters(request: params) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let response):
                 self.characters = response.results
+                completion(.success(response.results))
             case .failure(let error):
                 completion(.failure(.genericError(error: error)))
             }

@@ -8,11 +8,11 @@ struct CharactersData: Decodable {
 // MARK: - DataClass
 struct CharactersDataModel: Decodable {
     let offset, limit, total, count: Int
-    let results: [CharactersResult]
+    let results: [Character]
 }
 
 // MARK: - Result
-struct CharactersResult: Decodable {
+struct Character: Decodable {
     let id: Int
     let name, resultDescription: String
     let thumbnail: Thumbnail

@@ -103,6 +103,13 @@
 			path = Scene;
 			sourceTree = "<group>";
 		};
+		99AD104028CD1F96001DC6D4 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
 		99C93EFB28CC0E4D001D4F84 = {
 			isa = PBXGroup;
 			children = (
@@ -138,6 +145,7 @@
 		99C93F1D28CC0E50001D4F84 /* MarvelCharactersTests */ = {
 			isa = PBXGroup;
 			children = (
+				99AD104028CD1F96001DC6D4 /* Network */,
 				9963728228CCDD160037626C /* CharactersList */,
 			);
 			path = MarvelCharactersTests;
