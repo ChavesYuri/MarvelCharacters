@@ -5,7 +5,7 @@ protocol CharactersServiceProtocol {
 }
 
 protocol CharactersInteractorProtocol {
-    func loadCharacters()
+    func loadCharacters(request: CharactersScenarios.FetchCharacters.Request)
 }
 
 final class CharacterInteractor: CharactersInteractorProtocol {
@@ -20,13 +20,13 @@ final class CharacterInteractor: CharactersInteractorProtocol {
         self.presenter = presenter
     }
 
-    func loadCharacters() {
+    func loadCharacters(request: CharactersScenarios.FetchCharacters.Request) {
         service.loadCharacters { [weak self] result in
             switch result {
             case .success(let characters):
-                self?.presenter.presentCharacters(characters: characters)
+                self?.presenter.presentCharacters(response: .content(viewModels: characters))
             case .failure(let error):
-                break
+                self?.errorHandler(errorType: error)
             }
         }
     }
@@ -34,9 +34,9 @@ final class CharacterInteractor: CharactersInteractorProtocol {
     private func errorHandler(errorType: CharactersServiceError) {
         switch errorType {
         case .limitOfPages:
-            break
+            self.presenter.presentCharacters(response: .hidePagingLoading)
         case .genericError:
-            break
+            self.presenter.presentCharacters(response: .error)
         }
     }
 }

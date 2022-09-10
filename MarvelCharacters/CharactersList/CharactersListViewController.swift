@@ -1,12 +1,27 @@
 import Foundation
 import UIKit
+
+protocol CharactersListDisplay {
+    func displayCharacters(viewModel: CharactersScenarios.FetchCharacters.ViewModel)
+}
+
 final class CharactersListViewController: UIViewController {
+
+    private let interactor: CharactersInteractorProtocol
 
     private var dataSource: [String] = [] {
         didSet {
             tableView.reloadData()
         }
     }
+
+    private let activityIndicator: UIActivityIndicatorView = {
+        let spinner = UIActivityIndicatorView(style: .medium)
+        spinner.color = .red
+        spinner.translatesAutoresizingMaskIntoConstraints = false
+
+        return spinner
+    }()
 
     lazy var tableView: UITableView = {
         let tableView = UITableView()
@@ -16,8 +31,8 @@ final class CharactersListViewController: UIViewController {
         return tableView
     }()
 
-    init(dataSource: [String]) {
-        self.dataSource = dataSource
+    init(interactor: CharactersInteractorProtocol) {
+        self.interactor = interactor
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -29,15 +44,22 @@ final class CharactersListViewController: UIViewController {
         title = "Marvel Characters"
         super.viewDidLoad()
         setupUI()
+        interactor.loadCharacters(request: .init())
     }
 
     private func setupUI() {
         view.addSubview(tableView)
+        view.addSubview(activityIndicator)
 
         tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+
+        activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        activityIndicator.widthAnchor.constraint(equalToConstant: 30).isActive = true
+        activityIndicator.heightAnchor.constraint(equalToConstant: 30).isActive = true
     }
 }
 
@@ -54,7 +76,17 @@ extension CharactersListViewController: UITableViewDataSource {
     }
 }
 
-extension CharactersListViewController: UITableViewDelegate {
+extension CharactersListViewController: UITableViewDelegate {}
 
+extension CharactersListViewController: CharactersListDisplay {
+    func displayCharacters(viewModel: CharactersScenarios.FetchCharacters.ViewModel) {
+        switch viewModel {
+        case .content(viewModel: let characters):
+            self.dataSource = characters.map( { $0.name } )
+        case .error:
+            break
+        case .hidePagingLoading:
+            break
+        }
+    }
 }
-

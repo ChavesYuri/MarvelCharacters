@@ -1,7 +1,6 @@
 import Foundation
 protocol CharactersPresenterProtocol {
-    func presentCharacters(characters: [Character])
-    func presentError(error: Error)
+    func presentCharacters(response: CharactersScenarios.FetchCharacters.Response)
 }
 
 protocol CharacterProxyDisplayProtocol {
@@ -14,12 +13,15 @@ final class CharactersPresenter: CharactersPresenterProtocol {
     init(display: CharacterProxyDisplayProtocol) {
         self.display = display
     }
-    
-    func presentError(error: Error) {
-        <#code#>
-    }
 
-    func presentCharacters(characters: [Character]) {
-        
+    func presentCharacters(response: CharactersScenarios.FetchCharacters.Response) {
+        switch response {
+        case .content:
+            break
+        case .hidePagingLoading:
+            break
+        case .error:
+            break
+        }
     }
 }
