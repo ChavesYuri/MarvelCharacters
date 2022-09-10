@@ -19,7 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     private func setupRootController(windowScene: UIWindowScene) {
         let window = UIWindow(windowScene: windowScene)
-        let rootViewController = CharactersListViewController()
+        let rootViewController = CharactersListViewController(dataSource: [])
         let navigationController = UINavigationController(rootViewController: rootViewController)
 
         window.rootViewController = navigationController

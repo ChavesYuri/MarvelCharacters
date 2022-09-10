@@ -2,19 +2,28 @@ import Foundation
 import UIKit
 final class CharactersListViewController: UIViewController {
 
-    private var dataSource: [String] = ["Iron Man", "Spider Man"] {
+    private var dataSource: [String] = [] {
         didSet {
             tableView.reloadData()
         }
     }
 
-    private lazy var tableView: UITableView = {
+    lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.delegate = self
         tableView.dataSource = self
         return tableView
     }()
+
+    init(dataSource: [String]) {
+        self.dataSource = dataSource
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     override func viewDidLoad() {
         title = "Marvel Characters"

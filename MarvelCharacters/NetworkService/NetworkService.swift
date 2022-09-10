@@ -9,8 +9,6 @@ enum ErrorResponse: String, Error {
 }
 
 final class DefaultNetworkService: NetworkService {
-
-    private let baseUrl = "https://gateway.marvel.com"
     private let session: URLSession
 
     init(session: URLSession) {
@@ -19,7 +17,7 @@ final class DefaultNetworkService: NetworkService {
 
     func request<Request: DataRequest>(_ request: Request, completion: @escaping (Result<Request.Response, Error>) -> Void) {
 
-        guard var urlComponent = URLComponents(string: request.url) else {
+        guard var urlComponent = URLComponents(string: request.baseUrl + request.path) else {
             let error = NSError(
                 domain: ErrorResponse.invalidEndpoint.rawValue,
                 code: 404,
