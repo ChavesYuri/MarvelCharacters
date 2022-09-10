@@ -15,6 +15,7 @@
 		99C93F1F28CC0E50001D4F84 /* MarvelCharactersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C93F1E28CC0E50001D4F84 /* MarvelCharactersTests.swift */; };
 		99C93F2928CC0E50001D4F84 /* MarvelCharactersUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C93F2828CC0E50001D4F84 /* MarvelCharactersUITests.swift */; };
 		99C93F2B28CC0E50001D4F84 /* MarvelCharactersUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C93F2A28CC0E50001D4F84 /* MarvelCharactersUITestsLaunchTests.swift */; };
+		99C93F3928CC0EB3001D4F84 /* CharactersListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C93F3828CC0EB3001D4F84 /* CharactersListViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		99C93F2428CC0E50001D4F84 /* MarvelCharactersUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MarvelCharactersUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		99C93F2828CC0E50001D4F84 /* MarvelCharactersUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarvelCharactersUITests.swift; sourceTree = "<group>"; };
 		99C93F2A28CC0E50001D4F84 /* MarvelCharactersUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarvelCharactersUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		99C93F3828CC0EB3001D4F84 /* CharactersListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersListViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +99,7 @@
 		99C93F0628CC0E4D001D4F84 /* MarvelCharacters */ = {
 			isa = PBXGroup;
 			children = (
+				99C93F3728CC0E8A001D4F84 /* CharactersList */,
 				99C93F0728CC0E4D001D4F84 /* AppDelegate.swift */,
 				99C93F0928CC0E4D001D4F84 /* SceneDelegate.swift */,
 				99C93F0B28CC0E4D001D4F84 /* ViewController.swift */,
@@ -122,6 +125,14 @@
 				99C93F2A28CC0E50001D4F84 /* MarvelCharactersUITestsLaunchTests.swift */,
 			);
 			path = MarvelCharactersUITests;
+			sourceTree = "<group>";
+		};
+		99C93F3728CC0E8A001D4F84 /* CharactersList */ = {
+			isa = PBXGroup;
+			children = (
+				99C93F3828CC0EB3001D4F84 /* CharactersListViewController.swift */,
+			);
+			path = CharactersList;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -254,6 +265,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				99C93F3928CC0EB3001D4F84 /* CharactersListViewController.swift in Sources */,
 				99C93F0C28CC0E4D001D4F84 /* ViewController.swift in Sources */,
 				99C93F0828CC0E4D001D4F84 /* AppDelegate.swift in Sources */,
 				99C93F0A28CC0E4D001D4F84 /* SceneDelegate.swift in Sources */,
