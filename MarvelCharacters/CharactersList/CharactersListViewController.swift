@@ -2,7 +2,7 @@ import Foundation
 import UIKit
 final class CharactersListViewController: UIViewController {
 
-    private var dataSource: [String] = [] {
+    private var dataSource: [String] = ["Iron Man", "Spider Man"] {
         didSet {
             tableView.reloadData()
         }
@@ -38,7 +38,10 @@ extension CharactersListViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        let cell = UITableViewCell()
+        cell.textLabel?.text = dataSource[indexPath.row]
+
+        return cell
     }
 }
 
