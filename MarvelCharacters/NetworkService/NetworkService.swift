@@ -49,9 +49,7 @@ final class DefaultNetworkService: NetworkService {
 
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = request.method.rawValue
-
-        let basicHeader = ["apikey": apiKey, "hash": hash]
-        urlRequest.allHTTPHeaderFields = request.headers
+        urlRequest.allHTTPHeaderFields = buildHeader(headers: request.headers)
 
         session.dataTask(with: urlRequest) { (data, response, error) in
             if let error = error {
@@ -73,5 +71,20 @@ final class DefaultNetworkService: NetworkService {
             }
         }
         .resume()
+    }
+
+    private func buildHeader(headers: [String: String]) -> [String: String] {
+        // TODO: Create algorithm to generate hash according to ts
+        let apiKey = "42d211b71d86afb742cb3ba128f95bc8"
+        let hashAPI = "4fb1d7ac3e338c099db554a9557d123c"
+        let timesTemp = "1"
+
+        var header = ["apikey": apiKey, "hash": hashAPI, "ts": timesTemp]
+
+        headers.forEach {
+            header[$0.key] = $0.value
+        }
+
+        return headers
     }
 }
