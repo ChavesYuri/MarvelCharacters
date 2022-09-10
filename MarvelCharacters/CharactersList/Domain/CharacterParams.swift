@@ -1,6 +1,9 @@
 import Foundation
 
 struct CharactersParams: DataRequest {
+    let offset: Int
+    let limit: Int = 20
+
     var path: String {
         "/v1/public/characters"
     }
