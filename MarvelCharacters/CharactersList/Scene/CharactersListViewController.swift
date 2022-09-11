@@ -6,7 +6,6 @@ protocol CharactersListDisplay: AnyObject {
 }
 
 final class CharactersListViewController: UIViewController {
-
     private let interactor: CharactersInteractorProtocol
 
     private var dataSource: [String] = [] {
@@ -87,9 +86,7 @@ final class CharactersListViewController: UIViewController {
     }
 
     private func showBottomLoading(_ isShow: Bool) {
-        DispatchQueue.main.async {
-            self.loadingBottomView.isHidden = !isShow
-        }
+        DispatchQueue.main.async { self.loadingBottomView.isHidden = !isShow }
     }
 }
 
@@ -112,8 +109,6 @@ extension CharactersListViewController: UITableViewDelegate {
 
 extension CharactersListViewController: CharactersListDisplay {
     func displayCharacters(viewModel: CharactersScenarios.FetchCharacters.ViewModel) {
-        showLoading(false)
-        showBottomLoading(false)
         switch viewModel {
         case .content(viewModel: let characters):
             dataSource = characters.map( { $0.name } )
@@ -122,6 +117,9 @@ extension CharactersListViewController: CharactersListDisplay {
         case .hidePagingLoading:
             break
         }
+
+        showLoading(false)
+        showBottomLoading(false)
     }
 }
 

@@ -15,9 +15,9 @@ final class CharactersPresenter: CharactersPresenterProtocol {
         case .content(viewModels: let characters):
             display?.displayCharacters(viewModel: .content(viewModel: characters))
         case .hidePagingLoading:
-            break
+            display?.displayCharacters(viewModel: .hidePagingLoading)
         case .error:
-            break
+            display?.displayCharacters(viewModel: .error)
         }
     }
 }
