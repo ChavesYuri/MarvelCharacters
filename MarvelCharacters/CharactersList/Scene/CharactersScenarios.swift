@@ -17,7 +17,7 @@ enum CharactersScenarios {
         }
 
         enum ViewModel {
-            case content(viewModel: [Character])
+            case content(viewModel: [String])
             case hidePagingLoading
             case error
         }

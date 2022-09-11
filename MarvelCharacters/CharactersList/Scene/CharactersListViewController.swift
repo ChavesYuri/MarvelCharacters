@@ -110,8 +110,8 @@ extension CharactersListViewController: UITableViewDelegate {
 extension CharactersListViewController: CharactersListDisplay {
     func displayCharacters(viewModel: CharactersScenarios.FetchCharacters.ViewModel) {
         switch viewModel {
-        case .content(viewModel: let characters):
-            dataSource = characters.map( { $0.name } )
+        case .content(viewModel: let characterNames):
+            dataSource = characterNames
         case .error:
             break
         case .hidePagingLoading:
