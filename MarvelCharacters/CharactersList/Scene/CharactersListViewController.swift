@@ -43,7 +43,6 @@ final class CharactersListViewController: UIViewController {
     }
 
     override func viewDidLoad() {
-        title = "Marvel Characters"
         super.viewDidLoad()
         setupUI()
         showLoading(true)
@@ -51,6 +50,8 @@ final class CharactersListViewController: UIViewController {
     }
 
     private func setupUI() {
+        title = "Marvel Characters"
+
         view.addSubview(tableView)
         view.addSubview(activityIndicator)
 
@@ -85,7 +86,9 @@ extension CharactersListViewController: UITableViewDataSource {
     }
 }
 
-extension CharactersListViewController: UITableViewDelegate {}
+extension CharactersListViewController: UITableViewDelegate {
+    //TODO: Implement onDidTap
+}
 
 extension CharactersListViewController: CharactersListDisplay {
     func displayCharacters(viewModel: CharactersScenarios.FetchCharacters.ViewModel) {

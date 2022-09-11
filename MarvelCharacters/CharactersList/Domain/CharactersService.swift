@@ -1,11 +1,12 @@
 import Foundation
-protocol CharactersRepositoryProtocol {
-    func fetchCharacters(request: CharactersParams, completion: @escaping (Result<CharactersDataModel, Error>) -> Void)
-}
 
 enum CharactersServiceError: Error {
     case limitOfPages
     case genericError(error: Error)
+}
+
+protocol CharactersRepositoryProtocol {
+    func fetchCharacters(request: CharactersParams, completion: @escaping (Result<CharactersDataModel, Error>) -> Void)
 }
 
 final class CharactersService: CharactersServiceProtocol {
