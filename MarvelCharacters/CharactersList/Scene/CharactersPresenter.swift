@@ -3,16 +3,12 @@ protocol CharactersPresenterProtocol {
     func presentCharacters(response: CharactersScenarios.FetchCharacters.Response)
 }
 
-protocol CharacterProxyDisplayProtocol {
+protocol CharacterProxyDisplayProtocol: AnyObject {
     func displayCharacters()
 }
 
 final class CharactersPresenter: CharactersPresenterProtocol {
-    private let display: CharacterProxyDisplayProtocol
-
-    init(display: CharacterProxyDisplayProtocol) {
-        self.display = display
-    }
+    weak var display: CharacterProxyDisplayProtocol?
 
     func presentCharacters(response: CharactersScenarios.FetchCharacters.Response) {
         switch response {

@@ -6,18 +6,18 @@ protocol NetworkService {
 
 enum ErrorResponse: String, Error {
     case invalidEndpoint
+    case invalidPath
+    case invalidBaseURL
 }
 
 final class DefaultNetworkService: NetworkService {
-    private let session: URLSession
-
-    init(session: URLSession) {
-        self.session = session
-    }
-
     func request<Request: DataRequest>(_ request: Request, completion: @escaping (Result<Request.Response, Error>) -> Void) {
 
-        guard var urlComponent = URLComponents(string: request.baseUrl + request.path) else {
+        guard let baseURL = URL(string: request.baseUrl) else {
+            return completion(.failure(ErrorResponse.invalidBaseURL))
+        }
+
+        guard var urlComponent = URLComponents(string: request.path) else {
             let error = NSError(
                 domain: ErrorResponse.invalidEndpoint.rawValue,
                 code: 404,
@@ -27,7 +27,7 @@ final class DefaultNetworkService: NetworkService {
             return completion(.failure(error))
         }
 
-        var queryItems: [URLQueryItem] = []
+        var queryItems: [URLQueryItem] = defaultParameters()
 
         request.queryItems.forEach {
             let urlQueryItem = URLQueryItem(name: $0.key, value: $0.value)
@@ -37,7 +37,7 @@ final class DefaultNetworkService: NetworkService {
 
         urlComponent.queryItems = queryItems
 
-        guard let url = urlComponent.url else {
+        guard let url = urlComponent.url(relativeTo: baseURL) else {
             let error = NSError(
                 domain: ErrorResponse.invalidEndpoint.rawValue,
                 code: 404,
@@ -49,9 +49,9 @@ final class DefaultNetworkService: NetworkService {
 
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = request.method.rawValue
-        urlRequest.allHTTPHeaderFields = buildHeader(headers: request.headers)
+        urlRequest.allHTTPHeaderFields = request.headers
 
-        session.dataTask(with: urlRequest) { (data, response, error) in
+        URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
             if let error = error {
                 return completion(.failure(error))
             }
@@ -73,18 +73,14 @@ final class DefaultNetworkService: NetworkService {
         .resume()
     }
 
-    private func buildHeader(headers: [String: String]) -> [String: String] {
+    private func defaultParameters() -> [URLQueryItem] {
         // TODO: Create algorithm to generate hash according to ts
         let apiKey = "42d211b71d86afb742cb3ba128f95bc8"
         let hashAPI = "4fb1d7ac3e338c099db554a9557d123c"
         let timesTemp = "1"
 
-        var header = ["apikey": apiKey, "hash": hashAPI, "ts": timesTemp]
-
-        headers.forEach {
-            header[$0.key] = $0.value
-        }
-
-        return headers
+        return [.init(name: "apikey", value: apiKey),
+                .init(name: "hash", value: hashAPI),
+                .init(name: "ts", value: timesTemp)]
     }
 }

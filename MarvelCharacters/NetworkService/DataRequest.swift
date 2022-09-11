@@ -25,15 +25,9 @@ extension DataRequest where Response: Decodable {
 }
 
 extension DataRequest {
-    var baseUrl: String {
-        return "https://gateway.marvel.com/v1/public"
-    }
+    var baseUrl: String { "https://gateway.marvel.com/v1/public" }
 
-    var headers: [String : String] {
-        [:]
-    }
+    var headers: [String : String] { [:] }
 
-    var queryItems: [String : String] {
-        [:]
-    }
+    var queryItems: [String : String] { [:] }
 }

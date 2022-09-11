@@ -24,8 +24,10 @@ final class CharacterInteractor: CharactersInteractorProtocol {
         service.loadCharacters { [weak self] result in
             switch result {
             case .success(let characters):
+                print("Sucessooooosoosososoos")
                 self?.presenter.presentCharacters(response: .content(viewModels: characters))
             case .failure(let error):
+                print("Errrorrr: \(error.localizedDescription)")
                 self?.errorHandler(errorType: error)
             }
         }

@@ -12,6 +12,13 @@ struct CharactersParams: DataRequest {
         .get
     }
 
+    var queryItems: [String : String] {
+        [
+            "offset": "\(offset)",
+            "limit": "\(limit)"
+        ]
+    }
+
     func decode(_ data: Data) throws -> CharactersDataModel {
         let decoder = JSONDecoder()
         let response = try decoder.decode(CharactersData.self, from: data)
