@@ -25,11 +25,21 @@ final class CharactersListViewController: UIViewController {
         return spinner
     }()
 
+    private let loadingBottomView: UIActivityIndicatorView = {
+        let spinner = UIActivityIndicatorView(style: .medium)
+        spinner.color = .red
+        spinner.startAnimating()
+        spinner.isHidden = true
+
+        return spinner
+    }()
+
     lazy var tableView: UITableView = {
         let tableView = UITableView()
-        tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+
         return tableView
     }()
 
@@ -55,6 +65,8 @@ final class CharactersListViewController: UIViewController {
         view.addSubview(tableView)
         view.addSubview(activityIndicator)
 
+        tableView.tableFooterView = loadingBottomView
+
         tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
@@ -64,11 +76,19 @@ final class CharactersListViewController: UIViewController {
         activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         activityIndicator.widthAnchor.constraint(equalToConstant: 30).isActive = true
         activityIndicator.heightAnchor.constraint(equalToConstant: 30).isActive = true
+
+        loadingBottomView.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: 44)
     }
 
     private func showLoading(_ isLoading: Bool) {
         DispatchQueue.main.async {
             isLoading ? self.activityIndicator.startAnimating() : self.activityIndicator.stopAnimating()
+        }
+    }
+
+    private func showBottomLoading(_ isShow: Bool) {
+        DispatchQueue.main.async {
+            self.loadingBottomView.isHidden = !isShow
         }
     }
 }
@@ -93,6 +113,7 @@ extension CharactersListViewController: UITableViewDelegate {
 extension CharactersListViewController: CharactersListDisplay {
     func displayCharacters(viewModel: CharactersScenarios.FetchCharacters.ViewModel) {
         showLoading(false)
+        showBottomLoading(false)
         switch viewModel {
         case .content(viewModel: let characters):
             dataSource = characters.map( { $0.name } )
@@ -100,6 +121,21 @@ extension CharactersListViewController: CharactersListDisplay {
             break
         case .hidePagingLoading:
             break
+        }
+    }
+}
+
+extension CharactersListViewController {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard loadingBottomView.isHidden else { return }
+
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        let frameHeight = scrollView.frame.height * 1.5
+
+        if offsetY >= contentHeight - frameHeight {
+            showBottomLoading(true)
+            interactor.loadCharacters(request: .init())
         }
     }
 }

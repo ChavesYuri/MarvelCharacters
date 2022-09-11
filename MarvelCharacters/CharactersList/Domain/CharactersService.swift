@@ -22,6 +22,8 @@ final class CharactersService: CharactersServiceProtocol {
     }
 
     func loadCharacters(completion: @escaping (Result<[Character], CharactersServiceError>) -> Void) {
+        guard !isFetchInProgress else { return }
+
         guard let totalItems = totalItems else {
             /// First page
             fetch(params: .init(offset: initialOffset), completion: completion)
@@ -37,15 +39,25 @@ final class CharactersService: CharactersServiceProtocol {
     }
 
     private func fetch(params: CharactersParams, completion: @escaping (Result<[Character], CharactersServiceError>) -> Void) {
+        isFetchInProgress = true
+
         repository.fetchCharacters(request: params) { [weak self] result in
             guard let self = self else { return }
             switch result {
-            case .success(let response):
-                self.characters = response.results
-                completion(.success(response.results))
             case .failure(let error):
                 completion(.failure(.genericError(error: error)))
+            case .success(let response):
+                if params.offset == self.initialOffset {
+                    self.characters = response.results
+                } else {
+                    self.characters.append(contentsOf: response.results)
+                }
+
+                self.totalItems = response.total
+                completion(.success(self.characters))
             }
+
+            self.isFetchInProgress = false
         }
     }
 }
