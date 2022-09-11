@@ -8,12 +8,12 @@ protocol CharacterProxyDisplayProtocol: AnyObject {
 }
 
 final class CharactersPresenter: CharactersPresenterProtocol {
-    weak var display: CharacterProxyDisplayProtocol?
+    weak var display: CharactersListDisplay?
 
     func presentCharacters(response: CharactersScenarios.FetchCharacters.Response) {
         switch response {
-        case .content:
-            break
+        case .content(viewModels: let characters):
+            display?.displayCharacters(viewModel: .content(viewModel: characters))
         case .hidePagingLoading:
             break
         case .error:

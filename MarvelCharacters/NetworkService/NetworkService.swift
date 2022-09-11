@@ -18,13 +18,7 @@ final class DefaultNetworkService: NetworkService {
         }
 
         guard var urlComponent = URLComponents(string: request.path) else {
-            let error = NSError(
-                domain: ErrorResponse.invalidEndpoint.rawValue,
-                code: 404,
-                userInfo: nil
-            )
-
-            return completion(.failure(error))
+            return completion(.failure(ErrorResponse.invalidEndpoint))
         }
 
         var queryItems: [URLQueryItem] = defaultParameters()
@@ -38,13 +32,7 @@ final class DefaultNetworkService: NetworkService {
         urlComponent.queryItems = queryItems
 
         guard let url = urlComponent.url(relativeTo: baseURL) else {
-            let error = NSError(
-                domain: ErrorResponse.invalidEndpoint.rawValue,
-                code: 404,
-                userInfo: nil
-            )
-
-            return completion(.failure(error))
+            return completion(.failure(ErrorResponse.invalidEndpoint))
         }
 
         var urlRequest = URLRequest(url: url)

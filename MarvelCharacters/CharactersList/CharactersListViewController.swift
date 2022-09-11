@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
 
-protocol CharactersListDisplay {
+protocol CharactersListDisplay: AnyObject {
     func displayCharacters(viewModel: CharactersScenarios.FetchCharacters.ViewModel)
 }
 
@@ -11,7 +11,9 @@ final class CharactersListViewController: UIViewController {
 
     private var dataSource: [String] = [] {
         didSet {
-            tableView.reloadData()
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
         }
     }
 
@@ -44,6 +46,7 @@ final class CharactersListViewController: UIViewController {
         title = "Marvel Characters"
         super.viewDidLoad()
         setupUI()
+        showLoading(true)
         interactor.loadCharacters(request: .init())
     }
 
@@ -60,6 +63,12 @@ final class CharactersListViewController: UIViewController {
         activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         activityIndicator.widthAnchor.constraint(equalToConstant: 30).isActive = true
         activityIndicator.heightAnchor.constraint(equalToConstant: 30).isActive = true
+    }
+
+    private func showLoading(_ isLoading: Bool) {
+        DispatchQueue.main.async {
+            isLoading ? self.activityIndicator.startAnimating() : self.activityIndicator.stopAnimating()
+        }
     }
 }
 
@@ -80,9 +89,10 @@ extension CharactersListViewController: UITableViewDelegate {}
 
 extension CharactersListViewController: CharactersListDisplay {
     func displayCharacters(viewModel: CharactersScenarios.FetchCharacters.ViewModel) {
+        showLoading(false)
         switch viewModel {
         case .content(viewModel: let characters):
-            self.dataSource = characters.map( { $0.name } )
+            dataSource = characters.map( { $0.name } )
         case .error:
             break
         case .hidePagingLoading:
