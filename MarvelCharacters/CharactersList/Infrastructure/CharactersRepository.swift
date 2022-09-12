@@ -1,4 +1,5 @@
 import Foundation
+
 final class RemoteCharactersRepository: CharactersRepositoryProtocol {
     private let network: NetworkService
 

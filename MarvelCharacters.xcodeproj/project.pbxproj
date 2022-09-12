@@ -20,6 +20,8 @@
 		99AD104D28CE9B7D001DC6D4 /* CharactersInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99AD104C28CE9B7D001DC6D4 /* CharactersInteractorTests.swift */; };
 		99AD104F28CE9C03001DC6D4 /* CharactersServiceSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99AD104E28CE9C03001DC6D4 /* CharactersServiceSpy.swift */; };
 		99AD105128CEAE47001DC6D4 /* CharacterFixture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99AD105028CEAE47001DC6D4 /* CharacterFixture.swift */; };
+		99AD105328CEB11C001DC6D4 /* CharactersServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99AD105228CEB11C001DC6D4 /* CharactersServiceTests.swift */; };
+		99AD105528CEB189001DC6D4 /* CharactersRepositoryStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99AD105428CEB189001DC6D4 /* CharactersRepositoryStub.swift */; };
 		99C93F0828CC0E4D001D4F84 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C93F0728CC0E4D001D4F84 /* AppDelegate.swift */; };
 		99C93F0A28CC0E4D001D4F84 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C93F0928CC0E4D001D4F84 /* SceneDelegate.swift */; };
 		99C93F1128CC0E50001D4F84 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 99C93F1028CC0E50001D4F84 /* Assets.xcassets */; };
@@ -53,6 +55,8 @@
 		99AD104C28CE9B7D001DC6D4 /* CharactersInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersInteractorTests.swift; sourceTree = "<group>"; };
 		99AD104E28CE9C03001DC6D4 /* CharactersServiceSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersServiceSpy.swift; sourceTree = "<group>"; };
 		99AD105028CEAE47001DC6D4 /* CharacterFixture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterFixture.swift; sourceTree = "<group>"; };
+		99AD105228CEB11C001DC6D4 /* CharactersServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersServiceTests.swift; sourceTree = "<group>"; };
+		99AD105428CEB189001DC6D4 /* CharactersRepositoryStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersRepositoryStub.swift; sourceTree = "<group>"; };
 		99C93F0428CC0E4D001D4F84 /* MarvelCharacters.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MarvelCharacters.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		99C93F0728CC0E4D001D4F84 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		99C93F0928CC0E4D001D4F84 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -89,6 +93,7 @@
 				99AD104728CE990B001DC6D4 /* Doubles */,
 				9963728328CCDD270037626C /* CharacterListViewControllerTests.swift */,
 				99AD104C28CE9B7D001DC6D4 /* CharactersInteractorTests.swift */,
+				99AD105228CEB11C001DC6D4 /* CharactersServiceTests.swift */,
 			);
 			path = CharactersList;
 			sourceTree = "<group>";
@@ -129,6 +134,7 @@
 				99AD104A28CE9AAC001DC6D4 /* CharactersPresenterSpy.swift */,
 				99AD104E28CE9C03001DC6D4 /* CharactersServiceSpy.swift */,
 				99AD105028CEAE47001DC6D4 /* CharacterFixture.swift */,
+				99AD105428CEB189001DC6D4 /* CharactersRepositoryStub.swift */,
 			);
 			path = Doubles;
 			sourceTree = "<group>";
@@ -314,9 +320,11 @@
 				99AD104D28CE9B7D001DC6D4 /* CharactersInteractorTests.swift in Sources */,
 				9963728428CCDD270037626C /* CharacterListViewControllerTests.swift in Sources */,
 				99AD104F28CE9C03001DC6D4 /* CharactersServiceSpy.swift in Sources */,
+				99AD105328CEB11C001DC6D4 /* CharactersServiceTests.swift in Sources */,
 				99AD105128CEAE47001DC6D4 /* CharacterFixture.swift in Sources */,
 				99AD104928CE9922001DC6D4 /* CharactersInteractorSpy.swift in Sources */,
 				99AD104B28CE9AAC001DC6D4 /* CharactersPresenterSpy.swift in Sources */,
+				99AD105528CEB189001DC6D4 /* CharactersRepositoryStub.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

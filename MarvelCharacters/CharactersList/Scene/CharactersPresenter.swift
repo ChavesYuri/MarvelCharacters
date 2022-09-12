@@ -1,4 +1,5 @@
 import Foundation
+
 protocol CharactersPresenterProtocol {
     func presentCharacters(response: CharactersScenarios.FetchCharacters.Response)
 }

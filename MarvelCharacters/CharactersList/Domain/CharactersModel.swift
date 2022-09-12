@@ -7,7 +7,7 @@ struct CharactersData: Decodable {
 
 // MARK: - DataClass
 struct CharactersDataModel: Decodable {
-    let offset, limit, total, count: Int
+    let offset, limit, total: Int
     let results: [Character]
 }
 

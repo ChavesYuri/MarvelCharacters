@@ -1,11 +1,5 @@
-//
-//  CharactersScenarios.swift
-//  MarvelCharacters
-//
-//  Created by Yuri Chaves on 10/09/22.
-//
-
 import Foundation
+
 enum CharactersScenarios {
     enum FetchCharacters {
         struct Request {}
