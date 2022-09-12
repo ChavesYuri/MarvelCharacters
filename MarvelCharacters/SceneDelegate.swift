@@ -12,8 +12,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     private func setupRootController(windowScene: UIWindowScene) {
         let window = UIWindow(windowScene: windowScene)
-        let useCase = RemoteLoadCharacters(network: DefaultNetworkService())
-        let service = CharactersService(remoteCharacters: useCase)
+        let remote = RemoteLoadCharacters(network: DefaultNetworkService())
+        let service = CharactersService(remoteCharacters: remote)
         let presenter = CharactersPresenter()
         let interactor = CharacterInteractor(service: service, presenter: presenter)
         let rootViewController = CharactersListViewController(interactor: interactor)
