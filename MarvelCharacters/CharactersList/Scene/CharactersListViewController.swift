@@ -6,8 +6,6 @@ protocol CharactersListDisplay: AnyObject {
 }
 
 final class CharactersListViewController: UIViewController {
-    private let interactor: CharactersInteractorProtocol
-
     private var dataSource: [String] = [] {
         didSet {
             DispatchQueue.main.async {
@@ -15,6 +13,15 @@ final class CharactersListViewController: UIViewController {
             }
         }
     }
+
+    lazy var tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+
+        return tableView
+    }()
 
     private let activityIndicator: UIActivityIndicatorView = {
         let spinner = UIActivityIndicatorView(style: .medium)
@@ -33,14 +40,7 @@ final class CharactersListViewController: UIViewController {
         return spinner
     }()
 
-    lazy var tableView: UITableView = {
-        let tableView = UITableView()
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-
-        return tableView
-    }()
+    private let interactor: CharactersInteractorProtocol
 
     init(interactor: CharactersInteractorProtocol) {
         self.interactor = interactor

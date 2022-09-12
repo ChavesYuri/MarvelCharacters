@@ -3,6 +3,7 @@ import XCTest
 @testable import MarvelCharacters
 
 final class CharactersListViewControllerTests: XCTestCase {
+    let interactorSpy = CharactersInteractorSpy()
 
     func test_viewDidLoad_ShouldPresentTitle() {
         let sut = makeSUT()
@@ -12,17 +13,24 @@ final class CharactersListViewControllerTests: XCTestCase {
         XCTAssertEqual(sut.title, "Marvel Characters")
     }
 
-    func test_numberOfRowsInSection() {
-        let dataSourceStub = ["Spider Man", "Iron Man"]
-        let sut = makeSUT(dataSource: dataSourceStub)
+    func test_viewDidLoad_shouldCallInteractor() {
+        let sut = makeSUT()
 
         sut.loadViewIfNeeded()
 
-        XCTAssertEqual(sut.tableView.numberOfRows(inSection: 0), 2)
+        XCTAssertEqual(interactorSpy.invokedLoadCharacters, 1)
     }
 
-    func makeSUT(dataSource: [String] = []) -> CharactersListViewController {
-        let viewController = CharactersListViewController(dataSource: dataSource)
+    func test_numberOfRowsInSection() {
+        let sut = makeSUT()
+
+        sut.loadViewIfNeeded()
+
+        XCTAssertEqual(sut.tableView.numberOfRows(inSection: 0), 0)
+    }
+
+    func makeSUT() -> CharactersListViewController {
+        let viewController = CharactersListViewController(interactor: interactorSpy)
         return viewController
     }
 }
