@@ -19,12 +19,12 @@ final class RemoteLoadCharacters: RemoteCharactersUseCase {
     }
 
     private static func map(
-            _ remoteModel: CharactersDataModel
-        ) -> CharactersModel {
-            .init(offset: remoteModel.offset,
-                  limit: remoteModel.limit,
-                  total: remoteModel.total,
-                  characters: remoteModel.results.map({ .init(name: $0.name) })
-            )
-        }
+        _ remoteModel: CharactersDataModel
+    ) -> CharactersModel {
+        .init(offset: remoteModel.offset,
+              limit: remoteModel.limit,
+              total: remoteModel.total,
+              characters: remoteModel.results.map({ .init(name: $0.name) })
+        )
+    }
 }
