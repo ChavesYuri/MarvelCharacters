@@ -7,6 +7,7 @@ protocol CharactersListDisplay: AnyObject {
 
 protocol CharactersViewProtocol: UIView {
     func updateDataSource(_ characters: [String])
+    func hideLoading()
 }
 
 final class CharactersListViewController: UIViewController {
@@ -42,9 +43,10 @@ extension CharactersListViewController: CharactersListDisplay {
         case .content(viewModel: let characters):
             charactersView.updateDataSource(characters)
         case .error:
-            break
+            // TODO: Implement error message
+            charactersView.hideLoading()
         case .hidePagingLoading:
-            break
+            charactersView.hideLoading()
         }
     }
 }

@@ -77,7 +77,7 @@ final class CharactersView: UIView, CharactersViewProtocol {
         hideLoading()
     }
 
-    private func hideLoading() {
+    func hideLoading() {
         DispatchQueue.main.async {
             self.activityIndicator.isHidden = true
             self.loadingBottomView.isHidden = true
