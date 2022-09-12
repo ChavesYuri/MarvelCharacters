@@ -16,8 +16,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let service = CharactersService(remoteCharacters: remote)
         let presenter = CharactersPresenter()
         let interactor = CharacterInteractor(service: service, presenter: presenter)
-        let rootViewController = CharactersListViewController(interactor: interactor)
+        let view = CharactersView()
+        let rootViewController = CharactersListViewController(view: view, interactor: interactor)
         presenter.display = rootViewController
+        view.delegate = rootViewController
         let navigationController = UINavigationController(rootViewController: rootViewController)
 
         window.rootViewController = navigationController

@@ -5,15 +5,26 @@ enum CharactersServiceError: Error {
     case genericError(error: Error)
 }
 
+struct CharactersModel {
+    let offset, limit, total: Int
+    let characters: [CharacterModel]
+}
+
+struct CharacterModel {
+    let name: String
+}
+
 protocol RemoteCharactersUseCase {
-    func execute(request: CharactersParams, completion: @escaping (Result<CharactersDataModel, Error>) -> Void)
+    typealias Request = CharactersParams
+    typealias Result = Swift.Result<CharactersModel, Error>
+    func execute(request: Request, completion: @escaping (Result) -> Void)
 }
 
 final class CharactersService: CharactersServiceProtocol {
     private let initialOffset = 0
     private var totalItems: Int?
     private var isFetchInProgress = false
-    private var characters: [Character] = []
+    private var characters: [String] = []
 
     private let remoteCharacters: RemoteCharactersUseCase
 
@@ -21,7 +32,7 @@ final class CharactersService: CharactersServiceProtocol {
         self.remoteCharacters = remoteCharacters
     }
 
-    func loadCharacters(completion: @escaping (Result<[Character], CharactersServiceError>) -> Void) {
+    func loadCharacters(completion: @escaping (Result<[String], CharactersServiceError>) -> Void) {
         guard !isFetchInProgress else { return }
 
         guard let totalItems = totalItems else {
@@ -38,7 +49,7 @@ final class CharactersService: CharactersServiceProtocol {
         }
     }
 
-    private func fetch(params: CharactersParams, completion: @escaping (Result<[Character], CharactersServiceError>) -> Void) {
+    private func fetch(params: CharactersParams, completion: @escaping (Result<[String], CharactersServiceError>) -> Void) {
         isFetchInProgress = true
 
         remoteCharacters.execute(request: params) { [weak self] result in
@@ -48,9 +59,9 @@ final class CharactersService: CharactersServiceProtocol {
                 completion(.failure(.genericError(error: error)))
             case .success(let response):
                 if params.offset == self.initialOffset {
-                    self.characters = response.results
+                    self.characters = response.characters.map({ $0.name })
                 } else {
-                    self.characters.append(contentsOf: response.results)
+                    self.characters.append(contentsOf: response.characters.map({ $0.name }))
                 }
 
                 self.totalItems = response.total

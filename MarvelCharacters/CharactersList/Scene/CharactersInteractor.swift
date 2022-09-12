@@ -1,7 +1,7 @@
 import Foundation
 
 protocol CharactersServiceProtocol {
-    func loadCharacters(completion: @escaping (Result<[Character], CharactersServiceError>) -> Void)
+    func loadCharacters(completion: @escaping (Result<[String], CharactersServiceError>) -> Void)
 }
 
 protocol CharactersInteractorProtocol {

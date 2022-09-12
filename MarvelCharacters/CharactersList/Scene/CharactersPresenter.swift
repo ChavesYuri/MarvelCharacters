@@ -14,7 +14,7 @@ final class CharactersPresenter: CharactersPresenterProtocol {
     func presentCharacters(response: CharactersScenarios.FetchCharacters.Response) {
         switch response {
         case .content(viewModels: let characters):
-            display?.displayCharacters(viewModel: .content(viewModel: characters.map({ $0.name })))
+            display?.displayCharacters(viewModel: .content(viewModel: characters))
         case .hidePagingLoading:
             display?.displayCharacters(viewModel: .hidePagingLoading)
         case .error:

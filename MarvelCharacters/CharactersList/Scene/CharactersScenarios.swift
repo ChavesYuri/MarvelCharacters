@@ -5,7 +5,7 @@ enum CharactersScenarios {
         struct Request {}
 
         enum Response {
-            case content(viewModels: [Character])
+            case content(viewModels: [String])
             case hidePagingLoading
             case error
         }
