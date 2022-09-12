@@ -5,8 +5,8 @@ enum CharactersServiceError: Error {
     case genericError(error: Error)
 }
 
-protocol CharactersRepositoryProtocol {
-    func fetchCharacters(request: CharactersParams, completion: @escaping (Result<CharactersDataModel, Error>) -> Void)
+protocol RemoteCharactersUseCase {
+    func execute(request: CharactersParams, completion: @escaping (Result<CharactersDataModel, Error>) -> Void)
 }
 
 final class CharactersService: CharactersServiceProtocol {
@@ -15,10 +15,10 @@ final class CharactersService: CharactersServiceProtocol {
     private var isFetchInProgress = false
     private var characters: [Character] = []
 
-    private let repository: CharactersRepositoryProtocol
+    private let remoteCharacters: RemoteCharactersUseCase
 
-    init(repository: CharactersRepositoryProtocol) {
-        self.repository = repository
+    init(remoteCharacters: RemoteCharactersUseCase) {
+        self.remoteCharacters = remoteCharacters
     }
 
     func loadCharacters(completion: @escaping (Result<[Character], CharactersServiceError>) -> Void) {
@@ -41,7 +41,7 @@ final class CharactersService: CharactersServiceProtocol {
     private func fetch(params: CharactersParams, completion: @escaping (Result<[Character], CharactersServiceError>) -> Void) {
         isFetchInProgress = true
 
-        repository.fetchCharacters(request: params) { [weak self] result in
+        remoteCharacters.execute(request: params) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .failure(let error):

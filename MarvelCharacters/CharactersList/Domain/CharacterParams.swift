@@ -19,10 +19,10 @@ struct CharactersParams: DataRequest {
         ]
     }
 
-    func decode(_ data: Data) throws -> CharactersDataModel {
+    func decode(_ data: Data) throws -> CharactersData {
         let decoder = JSONDecoder()
         let response = try decoder.decode(CharactersData.self, from: data)
 
-        return response.data
+        return response
     }
 }

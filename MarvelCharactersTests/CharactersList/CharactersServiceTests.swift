@@ -1,14 +1,14 @@
 @testable import MarvelCharacters
 import XCTest
 final class CharactersServiceTests: XCTestCase {
-    private let repositoryStub = CharactersRepositoryStub()
+    private let charactersUseCaseSpy = CharactersUseCaseSpy()
 
     func test_loadCharacters_whenIsFirstRequest() {
-        repositoryStub.charactersStub = .success(.fixture())
+        charactersUseCaseSpy.charactersStub = .success(.fixture())
     }
 
     private func makeSUT() -> CharactersService {
-        CharactersService(repository: repositoryStub)
+        CharactersService(remoteCharacters: charactersUseCaseSpy)
     }
 }
 
