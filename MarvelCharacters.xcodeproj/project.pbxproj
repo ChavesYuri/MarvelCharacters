@@ -24,6 +24,8 @@
 		99AD105528CEB189001DC6D4 /* CharactersUseCaseSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99AD105428CEB189001DC6D4 /* CharactersUseCaseSpy.swift */; };
 		99AD105728CFAA00001DC6D4 /* CharactersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99AD105628CFAA00001DC6D4 /* CharactersView.swift */; };
 		99AD105928D0D133001DC6D4 /* CharactersWeakRefProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99AD105828D0D133001DC6D4 /* CharactersWeakRefProxy.swift */; };
+		99AD105C28D0E9B7001DC6D4 /* CharactersSwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99AD105B28D0E9B7001DC6D4 /* CharactersSwiftUIView.swift */; };
+		99AD105E28D10823001DC6D4 /* CharactersHostingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99AD105D28D10823001DC6D4 /* CharactersHostingViewController.swift */; };
 		99C93F0828CC0E4D001D4F84 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C93F0728CC0E4D001D4F84 /* AppDelegate.swift */; };
 		99C93F0A28CC0E4D001D4F84 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C93F0928CC0E4D001D4F84 /* SceneDelegate.swift */; };
 		99C93F1128CC0E50001D4F84 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 99C93F1028CC0E50001D4F84 /* Assets.xcassets */; };
@@ -61,6 +63,8 @@
 		99AD105428CEB189001DC6D4 /* CharactersUseCaseSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersUseCaseSpy.swift; sourceTree = "<group>"; };
 		99AD105628CFAA00001DC6D4 /* CharactersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersView.swift; sourceTree = "<group>"; };
 		99AD105828D0D133001DC6D4 /* CharactersWeakRefProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersWeakRefProxy.swift; sourceTree = "<group>"; };
+		99AD105B28D0E9B7001DC6D4 /* CharactersSwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersSwiftUIView.swift; sourceTree = "<group>"; };
+		99AD105D28D10823001DC6D4 /* CharactersHostingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersHostingViewController.swift; sourceTree = "<group>"; };
 		99C93F0428CC0E4D001D4F84 /* MarvelCharacters.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MarvelCharacters.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		99C93F0728CC0E4D001D4F84 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		99C93F0928CC0E4D001D4F84 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -145,6 +149,15 @@
 			path = Doubles;
 			sourceTree = "<group>";
 		};
+		99AD105A28D0E991001DC6D4 /* SwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				99AD105B28D0E9B7001DC6D4 /* CharactersSwiftUIView.swift */,
+				99AD105D28D10823001DC6D4 /* CharactersHostingViewController.swift */,
+			);
+			path = SwiftUI;
+			sourceTree = "<group>";
+		};
 		99C93EFB28CC0E4D001D4F84 = {
 			isa = PBXGroup;
 			children = (
@@ -188,6 +201,7 @@
 		99C93F3728CC0E8A001D4F84 /* CharactersList */ = {
 			isa = PBXGroup;
 			children = (
+				99AD105A28D0E991001DC6D4 /* SwiftUI */,
 				99AD103928CCEF08001DC6D4 /* Scene */,
 				99AD103628CCEEDF001DC6D4 /* Domain */,
 				99AD103128CCED3C001DC6D4 /* Infrastructure */,
@@ -305,6 +319,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				99C93F3C28CC1557001D4F84 /* NetworkService.swift in Sources */,
+				99AD105C28D0E9B7001DC6D4 /* CharactersSwiftUIView.swift in Sources */,
 				99AD103B28CCEFDD001DC6D4 /* RemoteLoadCharacters.swift in Sources */,
 				99C93F3928CC0EB3001D4F84 /* CharactersListViewController.swift in Sources */,
 				99AD103328CCED59001DC6D4 /* CharactersModel.swift in Sources */,
@@ -314,6 +329,7 @@
 				99C93F3E28CC1585001D4F84 /* DataRequest.swift in Sources */,
 				99AD104628CD2B8F001DC6D4 /* CharactersScenarios.swift in Sources */,
 				99AD105728CFAA00001DC6D4 /* CharactersView.swift in Sources */,
+				99AD105E28D10823001DC6D4 /* CharactersHostingViewController.swift in Sources */,
 				99AD104428CD2173001DC6D4 /* CharactersPresenter.swift in Sources */,
 				99C93F0828CC0E4D001D4F84 /* AppDelegate.swift in Sources */,
 				99AD103D28CCF0F2001DC6D4 /* CharacterParams.swift in Sources */,
