@@ -14,12 +14,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: windowScene)
         let remote = RemoteLoadCharacters(network: DefaultNetworkService())
         let service = CharactersService(remoteCharacters: remote)
-        let presenter = CharactersPresenter()
-        let interactor = CharacterInteractor(service: service, presenter: presenter)
         let view = CharactersView()
+        let proxy = CharactersWeakRefProxy()
+        let presenter = CharactersPresenter(display: proxy)
+        let interactor = CharacterInteractor(service: service, presenter: presenter)
         let rootViewController = CharactersListViewController(view: view, interactor: interactor)
-        presenter.display = rootViewController
+
+        proxy.view = rootViewController
         view.delegate = rootViewController
+
         let navigationController = UINavigationController(rootViewController: rootViewController)
 
         window.rootViewController = navigationController
